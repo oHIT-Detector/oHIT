@@ -1,4 +1,3 @@
 # oHIT
 
-Live Demo:
-https://ohit-detector-016f49ff4bac.herokuapp.com/ 
+2024-12-02 - Porting from windows to linux for deployment caused some issues. Working on them now, please check back in a day.
