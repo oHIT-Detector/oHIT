@@ -1,0 +1,68 @@
+FILE: detect-output\iotb-rules\janelas.rules
+------------------------------------------------
+THREATS DETECTED: 2
+SAC: 0
+WAC: 0
+STC: 0
+WTC: 2
+SCC: 0
+WCC: 0
+------------------------------------------------
+1. WTC THREAT DETECTED
+    THREAT PAIR: (r5a1, r4t1)
+
+    RULES:
+        RULE_A:         [r5]: ("Fecha as janelas de 4a e 5a feira as 8:00")
+        RULE_B:         [r4]: ("Comando em todas as janelas")
+
+    INITIAL TRIGGER:
+        TRIGGERS_A:     [r5t1]: Time cron 0 0 8 ? * WED,THU *
+
+    TRIGGER-ACTION PAIR
+        ACTION_A:       [r5a1]: janelas.sendCommand(down)
+        TRIGGER_B:      [r4t1]: Item janelas received command
+
+    OVERLAPPING CONDITIONS:
+        CONDITIONS_A:   [c0]:   no conditions guarding action 
+        
+        CONDITIONS_B:   [r4c1]: if (receivedcommand == up)
+
+    RESULTING ACTION:
+        ACTION_B:       [r4a1]: abrirjanelathais.sendCommand(on)
+
+    THREAT DESCRIPTION:
+    WHEN INITIAL TRIGGER IS ACTIVATED
+    IF OVERLAPPING SETS OF CONDITIONS ARE CONCURRENTLY ENABLED
+    THE TRIGGER-ACTION PAIR CAUSES A CHAIN OF ACTION EXECUTIONS.
+
+------------------------------------------------
+
+2. WTC THREAT DETECTED
+    THREAT PAIR: (r6a1, r4t1)
+
+    RULES:
+        RULE_A:         [r6]: ("Abre as janelas de 2a a 6a feira as 6:30")
+        RULE_B:         [r4]: ("Comando em todas as janelas")
+
+    INITIAL TRIGGER:
+        TRIGGERS_A:     [r6t1]: Time cron 0 0 6 ? * MON,TUE,WED,THU,FRI *
+
+    TRIGGER-ACTION PAIR
+        ACTION_A:       [r6a1]: janelas.sendCommand(up)
+        TRIGGER_B:      [r4t1]: Item janelas received command
+
+    OVERLAPPING CONDITIONS:
+        CONDITIONS_A:   [c0]:   no conditions guarding action 
+        
+        CONDITIONS_B:   [r4c1]: if (receivedcommand == up)
+
+    RESULTING ACTION:
+        ACTION_B:       [r4a1]: abrirjanelathais.sendCommand(on)
+
+    THREAT DESCRIPTION:
+    WHEN INITIAL TRIGGER IS ACTIVATED
+    IF OVERLAPPING SETS OF CONDITIONS ARE CONCURRENTLY ENABLED
+    THE TRIGGER-ACTION PAIR CAUSES A CHAIN OF ACTION EXECUTIONS.
+
+------------------------------------------------
+
